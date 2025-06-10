@@ -16,16 +16,16 @@ A real-time music sharing platform that allows users to create and join rooms to
 - React Router
 - React Player
 
-## Usage
+## Usage - Hosting a Room
 
 1. Install the [Jamster Browser Extension](#)
 2. Open YouTube Music in your browser
 3. A room is automatically created and synced to your music
-<br />
+
+## Usage - Joining a Room
 
 1. Visit [Jamster](https://jamster.vercel.app)
-2. Join a room
-3. Share the room link with friends to listen together
+2. Join a room or enter a room ID into the text box
 
 ## License
 
