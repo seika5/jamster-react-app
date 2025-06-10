@@ -177,3 +177,8 @@
     margin-bottom: 1rem;
     color: #000;
 }
+
+.react-player {
+  position: relative;
+  z-index: 1;
+}
