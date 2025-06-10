@@ -10,7 +10,18 @@ const Home = () => {
     const [error, setError] = useState(null);
     const [showAllJams, setShowAllJams] = useState(false);
     const [roomId, setRoomId] = useState('');
+    const [currentTime, setCurrentTime] = useState(Date.now());
+    const [isHovering, setIsHovering] = useState(false);
     const navigate = useNavigate();
+
+    // Update current time every second
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentTime(Date.now());
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, []);
 
     useEffect(() => {
         try {
@@ -71,15 +82,19 @@ const Home = () => {
     };
 
     const formatTimeAgo = (date) => {
-        const seconds = Math.floor((new Date() - date) / 1000);
+        const seconds = Math.max(0, Math.floor((currentTime - date.getTime()) / 1000));
         if (seconds < 60) return `${seconds}s ago`;
         const minutes = Math.floor(seconds / 60);
-        if (minutes < 60) return `${minutes}m ago`;
+        if (minutes < 60) {
+            const remainingSeconds = seconds % 60;
+            return `${minutes}m ${remainingSeconds}s ago`;
+        }
         const hours = Math.floor(minutes / 60);
         return `${hours}h ago`;
     };
 
     const handleRoomHover = (room) => {
+        setIsHovering(true);
         if (room.song) {
             // Extract video ID from YouTube URL
             const videoId = room.song.match(/(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/\s]{11})/)?.[1];
@@ -92,6 +107,7 @@ const Home = () => {
     };
 
     const handleRoomLeave = () => {
+        setIsHovering(false);
         const appElement = document.querySelector('.App');
         appElement.classList.remove('album-background');
     };
@@ -143,6 +159,7 @@ const Home = () => {
                             className="room-card glass-effect"
                             onMouseEnter={() => handleRoomHover(room)}
                             onMouseLeave={handleRoomLeave}
+                            onMouseOut={handleRoomLeave}
                         >
                             <h2>{room.id}</h2>
                             <p className="song-info">{room.title}</p>

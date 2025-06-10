@@ -1,6 +1,6 @@
 import "../App.css";
 import React, { useState, useEffect } from 'react';
-import { collection, onSnapshot } from "firebase/firestore";
+import { onSnapshot, doc } from "firebase/firestore";
 import { db } from '../firebase';
 import ReactPlayer from 'react-player';
 import { useParams, Link } from 'react-router-dom';
@@ -49,18 +49,19 @@ const Song = () => {
     };
 
     useEffect(() => {
-        const docRef = collection(db, "room")
-        console.log(docRef);
-        onSnapshot(docRef, (snapshot) => {
-            snapshot.docs.forEach((doc) => {
-                if (doc.id === roomId) {
-                    const newSong = doc.data();
-                    setSong(newSong);
-                    updateBackground(newSong.song);
-                }
-            })
-        })
-    }, [roomId])
+        const docRef = doc(db, "room", roomId);
+        const unsubscribe = onSnapshot(docRef, (doc) => {
+            if (doc.exists()) {
+                const newSong = doc.data();
+                setSong(newSong);
+                updateBackground(newSong.song);
+            }
+        }, (error) => {
+            console.error("Error fetching room data:", error);
+        });
+
+        return () => unsubscribe();
+    }, [roomId]);
 
     // Clean up background when component unmounts
     useEffect(() => {
