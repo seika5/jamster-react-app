@@ -18,6 +18,10 @@ function App() {
                     <Route path="/privacy" element={<Privacy />} />
                 </Routes>
                 <Analytics />
+                <div className="privacy-copyright">
+                    <a href="/privacy" className="privacy-link">Privacy Policy</a>
+                    <span className="copyright">&nbsp;© {new Date().getFullYear()} Ryan Mar</span>
+                </div>
             </div>
         </Router>
     );

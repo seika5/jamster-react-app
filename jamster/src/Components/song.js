@@ -1,5 +1,5 @@
 import "../App.css";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { onSnapshot, doc } from "firebase/firestore";
 import { db } from '../firebase';
 import ReactPlayer from 'react-player';
@@ -8,7 +8,9 @@ import { useParams, Link } from 'react-router-dom';
 const Song = () => {
     const [song, setSong] = useState([]);
     const [toasts, setToasts] = useState([]);
+    const [playerUrl, setPlayerUrl] = useState(null);
     const { roomId } = useParams();
+    const firstJoinRef = useRef(true);
 
     const showToast = (message) => {
         const id = Date.now();
@@ -55,6 +57,20 @@ const Song = () => {
                 const newSong = doc.data();
                 setSong(newSong);
                 updateBackground(newSong.song);
+                if (firstJoinRef.current && newSong.song && newSong.updatedAt) {
+                    const now = Date.now();
+                    const songTimestamp = newSong.updatedAt.toDate().getTime();
+                    let n = Math.floor((now - songTimestamp) / 1000);
+                    if (n < 0) n = 0;
+                    let url = newSong.song;
+                    if (!url.includes('$t=')) {
+                        url += (url.includes('?') ? '&' : '$') + `t=${n}`;
+                    }
+                    setPlayerUrl(url);
+                    firstJoinRef.current = false;
+                } else if (!firstJoinRef.current && newSong.song) {
+                    setPlayerUrl(newSong.song);
+                }
             }
         }, (error) => {
             console.error("Error fetching room data:", error);
@@ -98,10 +114,10 @@ const Song = () => {
                 </div>
                 {song.title && <h3>{song.title}</h3>}
                 <div>
-                    {song.song && (
+                    {playerUrl && (
                         <ReactPlayer
                             className="react-player"
-                            url={song.song}
+                            url={playerUrl}
                             width="500px"
                             height="500px"
                             playing={true}

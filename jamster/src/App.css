@@ -411,3 +411,43 @@ section > div {
     opacity: 1;
     transform: translateY(0);
 }
+
+.privacy-copyright {
+  position: fixed;
+  right: 24px;
+  bottom: 18px;
+  z-index: 1000;
+  background: rgba(59, 64, 73, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(3px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  transition: all 0.3s ease;
+}
+
+.privacy-copyright:hover {
+  background: rgba(59, 64, 73, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.privacy-link {
+  color: #61dafb;
+  text-decoration: underline;
+  margin-right: 8px;
+  transition: color 0.2s;
+}
+
+.privacy-link:hover {
+  color: #21a1f3;
+}
+
+.copyright {
+  color: #bbb;
+  font-size: 0.95em;
+}

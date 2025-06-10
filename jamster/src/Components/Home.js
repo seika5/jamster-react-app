@@ -11,7 +11,6 @@ const Home = () => {
     const [showAllJams, setShowAllJams] = useState(false);
     const [roomId, setRoomId] = useState('');
     const [currentTime, setCurrentTime] = useState(Date.now());
-    const [isHovering, setIsHovering] = useState(false);
     const navigate = useNavigate();
 
     // Update current time every second
@@ -94,7 +93,6 @@ const Home = () => {
     };
 
     const handleRoomHover = (room) => {
-        setIsHovering(true);
         if (room.song) {
             // Extract video ID from YouTube URL
             const videoId = room.song.match(/(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/\s]{11})/)?.[1];
@@ -107,7 +105,6 @@ const Home = () => {
     };
 
     const handleRoomLeave = () => {
-        setIsHovering(false);
         const appElement = document.querySelector('.App');
         appElement.classList.remove('album-background');
     };
