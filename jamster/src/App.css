@@ -1,10 +1,10 @@
 .App {
   text-align: center;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #282c34;
   color: white;
   position: relative;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 .App::before {
@@ -148,12 +148,15 @@
 
 .privacy-container {
     max-width: 800px;
-    margin: 0 auto;
+    margin: 2rem auto;
     padding: 2rem;
     color: #000;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    min-height: calc(100vh - 4rem);
+    position: relative;
+    z-index: 1;
 }
 
 .privacy-container h1 {
@@ -170,7 +173,10 @@
 
 .privacy-container section {
     margin-bottom: 2rem;
+    padding: 1rem;
     background-color: #fff;
+    position: relative;
+    display: block;
 }
 
 .privacy-container ul {
