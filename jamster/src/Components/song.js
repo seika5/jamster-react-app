@@ -76,7 +76,7 @@ const Song = () => {
             <div>
                 <div className="song-header">
                     <Link to="/" className="back-button glass-effect">← Back to Jams</Link>
-                    <h2>Room: {roomId}</h2>
+                <h2>Room: {roomId}</h2>
                     <div className="room-actions">
                         <button onClick={copyRoomId} className="action-button glass-effect" title="Copy Room ID">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
