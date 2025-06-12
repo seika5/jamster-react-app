@@ -18,7 +18,7 @@ A real-time music sharing platform that allows users to create and join rooms to
 
 ## Usage - Hosting a Room
 
-1. Install the [Jamster Browser Extension](#)
+1. Install the [Jamster Browser Extension](https://chromewebstore.google.com/detail/aoecaicnjmfelfiojlcdhkhhphpbokae)
 2. Open YouTube Music in your browser
 3. A room is automatically created and synced to your music
 
