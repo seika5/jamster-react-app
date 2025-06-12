@@ -1,0 +1,22 @@
+.extension-link {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+}
+
+.extension-link a {
+    color: #61dafb;
+    text-decoration: none;
+}
+
+.glass-effect {
+    background: rgba(59, 64, 73, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(3px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
