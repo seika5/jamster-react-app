@@ -7,7 +7,7 @@ function Privacy() {
         <div className="privacy-container">
             <Link to="/" className="back-button glass-effect">← Back to Jams</Link>
             <h1>Privacy Policy</h1>
-            <p>Last updated: {new Date().toLocaleDateString()}</p>
+            <p>Last updated: 6/10/2025</p>
             <div className="privacy-columns">
                 <div className="privacy-col">
                     <h2>Jamster Web App</h2>
