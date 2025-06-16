@@ -53,8 +53,16 @@ const Home = () => {
                             song: data.song || null
                         };
                     });
-                    // Filter out rooms without songs in active view
-                    const filteredRooms = showAllJams ? activeRooms : activeRooms.filter(room => room.song);
+                    let filteredRooms = showAllJams ? activeRooms : activeRooms.filter(room => room.song);
+
+                    if (showAllJams) {
+                        filteredRooms.sort((a, b) => {
+                            if (!a.lastUpdated) return 1;
+                            if (!b.lastUpdated) return -1;
+                            return b.lastUpdated - a.lastUpdated; // Newest first
+                        });
+                    }
+
                     setRooms(filteredRooms);
                     setLoading(false);
                 },
